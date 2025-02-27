@@ -1,22 +1,23 @@
 import './App.css';
+import CartWidget from './components/CartWidget';
+import ItemListContainer from './components/ItemListContainer';
 
 function App() {
   return (
     <div className="App">
       <nav className="navbar">
         <div className="navbar-brand">
-          <h1>Mi Sitio</h1>
+          <h1>TechStore</h1>
         </div>
         <ul className="nav-links">
           <li><a href="/">Inicio</a></li>
-          <li><a href="/productos">Productos</a></li>
-          <li><a href="/servicios">Servicios</a></li>
-          <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/computadoras">Computadoras</a></li>
+          <li><a href="/celulares">Celulares</a></li>
+          <li><a href="/accesorios">Accesorios</a></li>
+          <li><CartWidget /></li>
         </ul>
       </nav>
-      <header className="App-header">
-        <h1>Bienvenido a Mi Sitio</h1>
-      </header>
+      <ItemListContainer greeting="¡Bienvenidos a TechStore! Encuentra los mejores productos de tecnología." />
     </div>
   );
 }
