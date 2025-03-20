@@ -1,0 +1,14 @@
+.nav-links li:last-child a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-links li:last-child a:hover {
+  color: #74b9ff;
+}
+
+.App {
+  padding-top: 80px; /* Ajusta este valor según la altura de tu navbar */
+  min-height: 100vh;
+} 
