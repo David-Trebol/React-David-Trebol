@@ -194,4 +194,65 @@
 
 .keep-shopping:hover {
   background-color: #e9ecef;
+}
+
+.checkout-options {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-direction: column;
+}
+
+.finish-button,
+.continue-button {
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.finish-button {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.finish-button:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+.continue-button {
+  background-color: #f8f9fa;
+  color: #2c3e50;
+  border: 1px solid #dee2e6;
+}
+
+.continue-button:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.category {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #666;
+  margin: 1rem 0;
+}
+
+.price {
+  font-size: 2rem;
+  color: #2ecc71;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.description {
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 2rem;
 } 

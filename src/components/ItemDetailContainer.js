@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProductById } from '../data/products';
+import { getProductById } from '../services/firebase/firestore/products';
 import ItemDetail from './ItemDetail';
 import './ItemDetailContainer.css';
 
@@ -14,51 +14,44 @@ const ItemDetailContainer = () => {
     setLoading(true);
     setError(null);
 
-    getProductById(id)
-      .then(productData => {
+    const fetchProduct = async () => {
+      try {
+        const productData = await getProductById(id);
         setProduct(productData);
-      })
-      .catch(err => {
-        console.error('Error:', err);
-        setError('No se pudo cargar el producto. Por favor, intente nuevamente.');
-      })
-      .finally(() => {
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        setError("Error al cargar el producto. Por favor, intente nuevamente.");
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchProduct();
   }, [id]);
 
   if (loading) {
     return (
-      <div className="item-detail-container">
-        <div className="loading-state">
-          <div className="loader"></div>
-          <p>Cargando producto...</p>
-        </div>
+      <div className="loading-container">
+        <div className="loader"></div>
+        <p>Cargando producto...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="item-detail-container">
-        <div className="error-state">
-          <h2>¡Ups! Algo salió mal</h2>
-          <p>{error}</p>
-          <button onClick={() => window.location.reload()} className="retry-button">
-            Intentar nuevamente
-          </button>
-        </div>
+      <div className="error-container">
+        <h2>¡Ups! Algo salió mal</h2>
+        <p>{error}</p>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="item-detail-container">
-        <div className="not-found-state">
-          <h2>Producto no encontrado</h2>
-          <p>El producto que estás buscando no existe.</p>
-        </div>
+      <div className="error-container">
+        <h2>Producto no encontrado</h2>
+        <p>El producto que estás buscando no existe.</p>
       </div>
     );
   }

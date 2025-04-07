@@ -1,10 +1,23 @@
 .cart-widget {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 5px;
-  cursor: pointer;
+  text-decoration: none;
+  color: white;
   padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.cart-widget:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.cart-icon-container {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .cart-icon {
@@ -12,28 +25,57 @@
   color: white;
 }
 
-.cart-count {
+.cart-quantity {
+  position: absolute;
+  top: -8px;
+  right: -12px;
   background-color: #e74c3c;
   color: white;
   border-radius: 50%;
   padding: 2px 6px;
   font-size: 12px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 16px;
-  height: 16px;
+  min-width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  border: 2px solid #2c3e50;
+  animation: pulse 1s ease infinite;
 }
 
-.cart-widget:hover {
-  transform: scale(1.1);
-  transition: transform 0.2s ease;
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
+/* Efecto hover */
 .cart-widget:hover .cart-icon {
-  color: #3498db;
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-widget {
+    padding: 6px;
+  }
+
+  .cart-icon {
+    font-size: 20px;
+  }
+
+  .cart-quantity {
+    font-size: 10px;
+    min-width: 18px;
+    height: 18px;
+    top: -6px;
+    right: -10px;
+  }
 } 

@@ -2,36 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Item.css';
 
-const Item = ({ id, name, price, image, stock, category }) => {
+const Item = ({ id, name, price, image, description, stock }) => {
+  const formatPrice = (price) => {
+    if (typeof price === 'number') {
+      return `€${price.toFixed(2)}`;
+    }
+    return '€0.00';
+  };
+
   return (
-    <Link to={`/item/${id}`} className="item-card-link">
-      <article className="item-card">
-        <div className="item-image-container">
-          <img src={image} alt={name} className="item-image" />
-          {stock <= 5 && stock > 0 && (
-            <span className="stock-warning">¡Últimas unidades!</span>
-          )}
-          {stock === 0 && (
-            <span className="stock-warning out-of-stock">Sin stock</span>
-          )}
-        </div>
-        
-        <div className="item-info">
-          <h3 className="item-name">{name}</h3>
-          <span className="item-category">{category}</span>
-          <p className="item-price">${price.toFixed(2)}</p>
-          
-          <div className="item-footer">
-            <span className="stock-info">
-              Stock: {stock} {stock === 1 ? 'unidad' : 'unidades'}
-            </span>
-            <button className="view-detail-btn">
-              Ver detalle
-            </button>
-          </div>
-        </div>
-      </article>
-    </Link>
+    <div className="item-card">
+      <img src={image} alt={name} className="item-image" />
+      <div className="item-info">
+        <h3>{name}</h3>
+        <p className="item-description">{description}</p>
+        <p className="item-price">{formatPrice(price)}</p>
+        <p className="item-stock">Stock disponible: {stock}</p>
+        <Link to={`/item/${id}`} className="item-button">
+          Ver detalle
+        </Link>
+      </div>
+    </div>
   );
 };
 

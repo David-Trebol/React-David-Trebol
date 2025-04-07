@@ -1,54 +1,51 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 import ItemCount from './ItemCount';
 import './ItemDetail.css';
 
 const ItemDetail = ({ product }) => {
   const [quantityAdded, setQuantityAdded] = useState(0);
+  const { addItem } = useCart();
 
-  const onAdd = (quantity) => {
+  const handleOnAdd = (quantity) => {
     setQuantityAdded(quantity);
-    console.log('Cantidad agregada:', quantity);
+    addItem(product, quantity);
   };
 
   return (
-    <div className="item-detail">
+    <article className="item-detail">
       <div className="item-detail-image">
         <img src={product.image} alt={product.name} />
       </div>
       
       <div className="item-detail-info">
         <h2>{product.name}</h2>
-        <span className="category-badge">{product.category}</span>
-        
-        <div className="price-stock">
-          <p className="price">${product.price.toFixed(2)}</p>
-          <p className="stock">Stock disponible: {product.stock}</p>
-        </div>
-
+        <p className="category">{product.category}</p>
+        <p className="price">€{product.price.toFixed(2)}</p>
         <p className="description">{product.description}</p>
-
-        {quantityAdded === 0 ? (
-          <ItemCount 
-            stock={product.stock} 
-            initial={1} 
-            onAdd={onAdd}
-          />
-        ) : (
-          <div className="added-to-cart">
-            <p>¡Producto agregado al carrito!</p>
-            <div className="action-buttons">
-              <Link to="/cart" className="go-to-cart">
+        
+        {/* Renderizado condicional del contador o botones de finalización */}
+        {
+          quantityAdded === 0 ? (
+            <ItemCount 
+              initial={1} 
+              stock={product.stock} 
+              onAdd={handleOnAdd} 
+            />
+          ) : (
+            <div className="checkout-options">
+              <Link to='/cart' className="finish-button">
                 Terminar compra
               </Link>
-              <Link to="/" className="keep-shopping">
+              <Link to='/' className="continue-button">
                 Seguir comprando
               </Link>
             </div>
-          </div>
-        )}
+          )
+        }
       </div>
-    </div>
+    </article>
   );
 };
 
